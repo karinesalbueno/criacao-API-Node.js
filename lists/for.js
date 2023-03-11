@@ -1,8 +1,8 @@
-const service = require('./service')
+const { AllProducts, FilterProduct } = require('./service')
 
 async function getAll() {
   try {
-    const result = await service.AllProducts()
+    const result = await AllProducts()
     // array com o nome de todos os produtos
     const names = []
 
@@ -18,7 +18,7 @@ async function getAll() {
 
 async function Filter() {
   try {
-    const result = await service.FilterProduct('7')
+    const result = await FilterProduct('7')
     // filtra um produto pelo id e retorna depois buscando a especificação
 
     const data = result

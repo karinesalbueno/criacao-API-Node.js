@@ -27,6 +27,20 @@ class Database {
     return true
   }
 
+  async remover(id) {
+    if (!id) {
+      await this.escreverArquivo([])
+    }
+    const dados = await this.obterDadosArquivo()
+    const indice = dados.findIndex((item) => item.id === parseInt(id))
+
+    if (indice === -1) {
+      throw Error('o usuario informado nao existe')
+    }
+    dados.splice(indice, 1)
+    return await this.escreverArquivo(dados)
+  }
+
   async cadastrar(heroi) {
     const dados = await this.obterDadosArquivo()
     // simular criando um id

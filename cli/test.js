@@ -7,11 +7,11 @@ const DEFAULT_ITEM_CADASTRAR = {
   id: 1,
 }
 
-describe('Listar - manipulação herois', () => {
+describe('Manipulação herois', () => {
   before(async () => {
     await database.cadastrar(DEFAULT_ITEM_CADASTRAR)
   })
-  it('deve pesquisar heroi usando arquivos', async () => {
+  it('listar-deve pesquisar heroi usando arquivos', async () => {
     const expected = DEFAULT_ITEM_CADASTRAR
     // desestruturação: entre chaves pegando apenas a 1º posiçao do array
     // listando usuario por um id específico
@@ -19,14 +19,19 @@ describe('Listar - manipulação herois', () => {
     console.log(result)
     deepEqual(result, expected)
   })
-})
 
-describe('Cadastrar - manipulação herois', () => {
-  it('deve cadastrar um heroi usando arquivos', async () => {
+  it('Cadastrar- deve cadastrar um heroi usando arquivos', async () => {
     const expected = DEFAULT_ITEM_CADASTRAR
     const result = await database.cadastrar(DEFAULT_ITEM_CADASTRAR)
     const [actual] = await database.listar(DEFAULT_ITEM_CADASTRAR.id)
 
     deepEqual(actual, expected)
+  })
+
+  it('Remover- deve remover um heroi', async () => {
+    const expected = true
+    const result = await database.remover(DEFAULT_ITEM_CADASTRAR.id)
+
+    deepEqual(result, expected)
   })
 })

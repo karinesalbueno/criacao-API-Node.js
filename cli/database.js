@@ -27,6 +27,24 @@ class Database {
     return true
   }
 
+  async atualizar(id, modify) {
+    const dados = await this.obterDadosArquivo()
+    //comparar se o id q passou é valido
+    const indice = dados.findIndex((item) => item.id === parseInt(id))
+
+    if (indice === -1) {
+      throw Error('heroi nao existe')
+    }
+    const atual = dados[indice]
+    const objetoAtualizar = {
+      ...atual,
+      ...modify,
+    }
+    //remover da lista passando index
+    dados.splice(indice, 1)
+    return await this.escreverArquivo([...dados, objetoAtualizar])
+  }
+
   async remover(id) {
     if (!id) {
       await this.escreverArquivo([])
